@@ -1,0 +1,10 @@
+@import '../Var.scss';
+
+.container__form--project {
+    border: 1px solid red;
+    margin: 3rem 2rem;
+    width: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
