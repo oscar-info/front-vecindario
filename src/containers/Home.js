@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import CardProject from "../components/ProjectCard";
 import axios from "axios";
 import FormModal from "../components/FormModal";
+import { useToasts } from 'react-toast-notifications'
 
 function Home() {
   const history = useHistory();
@@ -14,7 +15,9 @@ function Home() {
   const [setModalType] = useState(" ");
   const [setModalIsOpen] = useState(false);
   const [leads] = useState([]);
+  const { addToast } = useToasts()
 
+  console.log(projectId)
 
   function openModal(type) {
     setModalType(type);
@@ -29,11 +32,20 @@ function Home() {
 
 
   const createLead = (data) => {
-
-    axios.post("http://localhost:3000/projects", data)
+    axios.post("http://localhost:3000/leads", {...data, project_id: projectId})
     .then((response) => {
       leads.push(response.data);
-    });
+      addToast("Su informacion fue enviada exitosamente", {
+        appearance: 'success',
+        autoDismiss: true,
+    })
+    history.push('/')
+    })
+    .catch(() => {
+      addToast("Su informacion no pudo ser enviada", {
+        appearance: 'error',
+        autoDismiss: true,
+    })})
   };
 
   useEffect(() => {
@@ -73,7 +85,7 @@ function Home() {
       />
       <Route
         exact
-        path="/lead/:projectId"
+        path="/leads/:projectId"
         component={() => (
           <FormModal
             type={'lead'}
