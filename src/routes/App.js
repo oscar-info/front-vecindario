@@ -4,18 +4,26 @@ import Home from '../containers/Home'
 import Cms from '../containers/Cms'
 import CreateProject from '../containers/CreateProject'
 import '../assets/styles/App.scss'
+import { ToastProvider } from 'react-toast-notifications';
 
 const App = () => {
   return (
     <>
-      <Router>
-        <Switch>
-          <Route path='/' component={ Home } />
-          <Route exact path='/cms' component={ Cms } />
-          <Route  exact path='/cms/create_project' component={ CreateProject }/>
-          <Redirect to='/' />
-        </Switch>
-    </Router>
+      <ToastProvider
+        autoDismiss
+        autoDismissTimeout={6000}
+        placement="bottom-center"
+      >
+        <Router>
+          <Switch>
+            <Route exact path='/' component={ Home } />
+            <Route path='/leads/:projectId' component={ Home } />
+            <Route exact path='/cms' component={ Cms } />
+            <Route  exact path='/cms/create_project' component={ CreateProject }/>
+            <Redirect to='/' />
+          </Switch>
+        </Router>
+    </ToastProvider>
     </>
   );
 }
