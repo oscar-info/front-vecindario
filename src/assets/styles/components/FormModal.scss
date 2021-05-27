@@ -1,0 +1,73 @@
+@import "../Var.scss";
+
+.continer__formModal {
+    border: 2px solid $color-secondary;
+    border-radius: 1.5rem;
+    position: fixed;
+    top: 12rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 340px;
+    max-height: auto;
+    background: linear-gradient(180deg, rgba(218, 180, 75, 0.16) 0%, rgba(255, 255, 255, 0.04) 100%);
+    mix-blend-mode: normal;
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 3rem;
+}
+::placeholder {
+    color: $color-placeholder;
+}
+
+.card__btnClose {
+    background: none;
+    width: 25px;
+    height: auto;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    align-self: flex-end;
+    margin-bottom: 1rem;
+}
+
+.input-txt {
+    color: $color-secondary;
+    margin-top: 1rem;
+    background: none;
+    outline: none;
+    border: none;
+    font-size: 1.8rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+hr {
+    border: 1px solid $color-grey;
+}
+
+.card__btnRegister {
+    width: 131px;
+    height: 34.17px;
+    background: $color-btn-primary;
+    box-shadow: 0px 4px 10px 2px rgba(105, 80, 180, 0.6);
+    border-radius: 30px;
+    border: none;
+    padding: .5rem 2rem;
+    color: $color-secondary;
+    font-weight: 600;
+    font-size: 14px;
+    display: block;
+    align-self: center;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.card__btnRegister:hover {
+    opacity: 0.9;
+}

@@ -8,14 +8,14 @@ function Cms(){
         <div className="cms">
             <Header/>
             <div className="container__cms">
-                {/* <WelcomeCms /> */}
+                {/* <CMSWelcome /> */}
                 <CmsLeads />
             </div>
         </div>
     )
 }
 
-const WelcomeCms = () => {
+const CMSWelcome = () => {
     return (
         <p>Bienvenido <span>Oscar Eduardo</span> selecciona una acción en el menu de opciones</p>
     )

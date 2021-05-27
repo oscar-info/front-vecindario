@@ -10,7 +10,7 @@ const App = () => {
     <>
       <Router>
         <Switch>
-          <Route exact path='/' component={ Home } />
+          <Route path='/' component={ Home } />
           <Route exact path='/cms' component={ Cms } />
           <Route  exact path='/cms/create_project' component={ CreateProject }/>
           <Redirect to='/' />
