@@ -25,24 +25,6 @@ header {
     align-items: flex-end;
 }
 
-.button__post {
-    cursor: pointer;
-    color: $color-white;
-    border-radius: 5px;
-    border: none;
-    width: 77px;
-    height: 36px;
-    background: $color-btn-primary;
-    font-family: $theme-font;
-    font-style: normal;
-    font-weight: 600;
-}
-
-.button__post:hover {
-    opacity: 0.9;
-}
-
-
 .menu__button:hover {
     color: $color-secondary;
     cursor: pointer;
@@ -66,6 +48,7 @@ input[type=checkbox]{
     display: none;
 }
 
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -80,6 +63,15 @@ input[type=checkbox]{
 
 .dropdown-content__title {
     color: $color-primary
+}
+
+input[type=search] {
+    margin: 1rem 0;
+    height: 2.5rem;
+}
+
+hr{
+    margin: 0.5rem;
 }
 
 input[type=checkbox]:checked ~ .dropdown-content {
@@ -111,5 +103,9 @@ input[type=checkbox]:checked ~ .dropdown-content {
 
     .dropdown-content{
         top: 55px;
+    }
+
+    a {
+        font-size: 1.4rem;
     }
 }

@@ -26,15 +26,38 @@ function Menu({openModal}) {
             </label>
             <input type="checkbox" id="prueba"></input>
             <div className="dropdown-content">
-                <h4 className="dropdown-content__title">Zona Administradores</h4>
+                <DropDownCms/>
+            </div>
+    </div>
+    );
+}
+
+const DropDownCms = () => {
+    return (
+        <>
+            <Link to="/cms/create_project" className="dropdown-content__title">+ Crear nuevo proyecto</Link>
+            <input type="search" id="site-search" name="searchBar"
+                aria-label="Search in my projects" autoFocus />
+            <h3>Proyectos Activos</h3>
+            <hr/>
+            <div className="listProyects">
+                <Link>Proyecto 1</Link>
+            </div>
+        </>
+    )
+};
+
+const DropDownHome = () => {
+    return (
+        <>
+            <h4 className="dropdown-content__title">Zona Administradores</h4>
                 <hr/>
                 <Link to="/auth/login" className="menu-item">Ingresar</Link>
                 <br />
                 <Link to="/registrarse" className="menu-item">Registrarse</Link>
                 <br />
-            </div>
-    </div>
-    );
-}
+        </>
+    )
+};
 
 export default Header;
