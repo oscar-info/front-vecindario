@@ -4,10 +4,9 @@ import btnClose from '../assets/images/btn-close.png'
 import ReactModal from 'react-modal'
 import { useForm } from "react-hook-form";
 
-const FormModal = ({type = '', isOpen, onRequestClose }) => {
+const FormModal = ({type = '', isOpen, onRequestClose, onSubmit }) => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
 
     const RenderRegisterForm = () => {
         return (
@@ -121,7 +120,7 @@ const FormModal = ({type = '', isOpen, onRequestClose }) => {
                 name='phone'
                 placeholder={"Telefono Movil"}
                 className="input-txt"
-                {...register("phone", { required: true, pattern: /^[+][(]{0,1}[5][7][)]{0,1}[-\s./0-9]*$/  })}
+                {...register("phone", { required: true, pattern: /^[+][(]{0,1}[5][7][)]{0,1}[-\s./0-9]*$/ })}
                 />
                 {errors.phone?.type === 'required' && "Telefono requerido, formato valido: +57 300 000 0000"}
                 <hr></hr>

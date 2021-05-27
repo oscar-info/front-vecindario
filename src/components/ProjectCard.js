@@ -6,7 +6,7 @@ import imgRestroom from "../assets/images/icon_toilet.svg"
 import imgProject from "../assets/images/img_project.png"
 import { Link } from "react-router-dom";
 
-const CardProject = ({data, openModal}) => {
+const CardProject = ({data}) => {
 
     return (
         <div className="container__card--project">
@@ -39,8 +39,7 @@ const CardProject = ({data, openModal}) => {
                     </div>
                 </div>
                 <p className="subsidy">{data.subsidy === false ? "No aplica subsidio" : "Aplica subsidio"}</p>
-                <Link to="/lead" className="btn__lead">Estoy interezado</Link>
-                {/* <button className="btn__lead" openModal={openModal}>Estoy interezado</button> */}
+                <Link to={`/leads/${data.id}`} className="btn__lead">Estoy interezado</Link>
             </div>
         </div>
     );
