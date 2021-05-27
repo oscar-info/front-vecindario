@@ -28,7 +28,7 @@ function Menu({openModal}) {
             <div className="dropdown-content">
                 <h4 className="dropdown-content__title">Zona Administradores</h4>
                 <hr/>
-                <Link to="/ingresar" className="menu-item">Ingresar</Link>
+                <Link to="/auth/login" className="menu-item">Ingresar</Link>
                 <br />
                 <Link to="/registrarse" className="menu-item">Registrarse</Link>
                 <br />
