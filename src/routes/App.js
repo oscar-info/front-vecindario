@@ -7,10 +7,12 @@ import DetailProject from '../containers/DetailProject'
 import Leads from '../containers/Leads'
 import '../assets/styles/App.scss'
 import { ToastProvider } from 'react-toast-notifications';
+import { RecoilRoot } from 'recoil';
 
 const App = () => {
   return (
     <>
+      <RecoilRoot>
       <ToastProvider
         autoDismiss
         autoDismissTimeout={6000}
@@ -30,6 +32,7 @@ const App = () => {
           </Switch>
         </Router>
     </ToastProvider>
+    </RecoilRoot>
     </>
   );
 }
