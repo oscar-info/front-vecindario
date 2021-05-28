@@ -1,9 +1,16 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
 import Header from '../components/Header';
-import '../assets/styles/components/Leads.scss'
+import '../assets/styles/components/Leads.scss';
 
 
 const Leads = () => {
+
+    const showLeads = () => {
+        // requiere token de autorizacion
+        axios.get("http://localhost:3000/leads_by_project_id/2")
+    };
+
     return (
         <>
             <Header/>

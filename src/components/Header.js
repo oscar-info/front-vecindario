@@ -1,7 +1,7 @@
 import React from "react";
 import "../assets/styles/components/Header.scss";
 import logo from "../assets/images/vecindario-logo.svg";
-import menu from "../assets/images/menu.svg"
+import menu from "../assets/images/menu.svg";
 import { Link } from "react-router-dom";
 
 
@@ -26,7 +26,7 @@ function Menu({openModal}) {
             </label>
             <input type="checkbox" id="prueba"></input>
             <div className="dropdown-content">
-                <DropDownCms/>
+                <DropDownHome/>
             </div>
     </div>
     );
@@ -36,7 +36,7 @@ const DropDownCms = () => {
     return (
         <>
             <Link to="/cms/create_project" className="dropdown-content__title">+ Crear nuevo proyecto</Link>
-            <input type="search" id="site-search" name="searchBar"
+            <input type="search" id="site-search" placeholder="Buscar" name="searchBar"
                 aria-label="Search in my projects" autoFocus />
             <h3>Proyectos Activos</h3>
             <hr/>

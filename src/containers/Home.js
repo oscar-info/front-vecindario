@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Route, useHistory, useParams } from 'react-router-dom'
+import { Route, useHistory, useParams } from 'react-router-dom';
 import "../assets/styles/components/Home.scss";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CardProject from "../components/ProjectCard";
 import axios from "axios";
 import FormModal from "../components/FormModal";
-import { useToasts } from 'react-toast-notifications'
+import { useToasts } from 'react-toast-notifications';
+import { useSetRecoilState } from "recoil";
+import { currentUserState } from "../atoms/atoms";
 
 function Home() {
   const history = useHistory();
@@ -15,9 +17,9 @@ function Home() {
   const [setModalType] = useState(" ");
   const [setModalIsOpen] = useState(false);
   const [leads] = useState([]);
-  const [currentUser, setCurrentUser] = useState([]);
-  const [users] = useState([]);
+  const [user, setUser] = useState([]);
   const { addToast } = useToasts()
+  const setCurrentUser = useSetRecoilState(currentUserState)
 
 
   function openModal(type) {
@@ -53,7 +55,8 @@ function Home() {
     console.log(data)
     axios.post("http://localhost:3000/auth/login", data)
     .then((response) => {
-      setCurrentUser(response.data)
+      setCurrentUser(response.data) 
+      localStorage.setItem('auth_token', response.data.token);
       history.push('/cms')
     })
     .catch(() => {
@@ -61,18 +64,18 @@ function Home() {
         appearance: 'error',
         autoDismiss: true,
     })})
-    console.log("current user: " + currentUser)
   };
 
   const createUser = (data) => {
     axios.post("http://localhost:3000/users", data)
     .then((response) => {
-      users.push(response.data);
+      user.push(response.data);
+      setUser(response.data);
       addToast("El usuario fue creado exitosamente", {
         appearance: 'success',
         autoDismiss: true,
       })
-      history.push('/cms')
+      history.push('//auth/login')
     })
     .catch(() => {
       addToast("Su cuenta no pudo ser creada, verifique todos los campos", {

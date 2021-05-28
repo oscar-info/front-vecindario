@@ -1,13 +1,19 @@
-import React from 'react'
-import "../assets/styles/components/CreateProject.scss"
+import React from 'react';
+import axios from 'axios';
+import "../assets/styles/components/CreateProject.scss";
 import { Link } from "react-router-dom";
-import imgBack from "../assets/images/arrow-left-circle.svg"
+import imgBack from "../assets/images/arrow-left-circle.svg";
 import { useForm } from "react-hook-form";
 
 const CreateProject = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => console.log(data);
+    
+    const createNewProject = (data) => {
+        // requiere token de autorizacion
+        axios.post("http://localhost:3000/projects")
+    };
 
     return (
         <div className="container_newProject">

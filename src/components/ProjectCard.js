@@ -1,9 +1,9 @@
 import React from "react";
 import "../assets/styles/components/ProjectCard.scss";
-import imgArea from "../assets/images/icon_area.svg"
-import imgParking from "../assets/images/icon_car.svg"
-import imgRestroom from "../assets/images/icon_toilet.svg"
-import imgProject from "../assets/images/img_project.png"
+import imgArea from "../assets/images/icon_area.svg";
+import imgParking from "../assets/images/icon_car.svg";
+import imgRestroom from "../assets/images/icon_toilet.svg";
+import imgProject from "../assets/images/img_project.png";
 import { Link } from "react-router-dom";
 
 const CardProject = ({data}) => {

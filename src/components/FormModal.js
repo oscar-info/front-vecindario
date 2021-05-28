@@ -1,7 +1,7 @@
 import React from 'react';
-import '../assets/styles/components/FormModal.scss'
-import btnClose from '../assets/images/btn-close.png'
-import ReactModal from 'react-modal'
+import '../assets/styles/components/FormModal.scss';
+import btnClose from '../assets/images/btn-close.png';
+import ReactModal from 'react-modal';
 import { useForm } from "react-hook-form";
 
 const FormModal = ({type = '', isOpen, onRequestClose, onSubmit }) => {

@@ -1,5 +1,5 @@
-import React from 'react'
-import '../assets/styles/components/Footer.scss'
+import React from 'react';
+import '../assets/styles/components/Footer.scss';
 import logo from "../assets/images/vecindario-logo.svg";
 
 
