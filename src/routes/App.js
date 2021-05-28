@@ -3,6 +3,8 @@ import { Redirect, Route, Switch, BrowserRouter as Router } from 'react-router-d
 import Home from '../containers/Home'
 import Cms from '../containers/Cms'
 import CreateProject from '../containers/CreateProject'
+import DetailProject from '../containers/DetailProject'
+import Leads from '../containers/Leads'
 import '../assets/styles/App.scss'
 import { ToastProvider } from 'react-toast-notifications';
 
@@ -22,6 +24,8 @@ const App = () => {
             <Route path='/leads/:projectId' component={ Home } />
             <Route exact path='/cms' component={ Cms } />
             <Route  exact path='/cms/create_project' component={ CreateProject }/>
+            <Route  exact path='/cms/detail_project' component={ DetailProject }/>
+            <Route  exact path='/cms/leads' component={ Leads }/>
             <Redirect to='/' />
           </Switch>
         </Router>
