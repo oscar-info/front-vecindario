@@ -7,8 +7,9 @@ import CardProject from "../components/ProjectCard";
 import axios from "axios";
 import FormModal from "../components/FormModal";
 import { useToasts } from 'react-toast-notifications';
-import { useSetRecoilState } from "recoil";
-import { currentUserState } from "../atoms/atoms";
+import useAuth from "../hooks/useAuth";
+
+
 
 function Home() {
   const history = useHistory();
@@ -19,7 +20,7 @@ function Home() {
   const [leads] = useState([]);
   const [user, setUser] = useState([]);
   const { addToast } = useToasts()
-  const setCurrentUser = useSetRecoilState(currentUserState)
+  const { handleAuth } = useAuth();
 
 
   function openModal(type) {
@@ -28,7 +29,7 @@ function Home() {
   }
 
   const getProjects = () => {
-    axios.get("http://localhost:3000/projects").then((response) => {
+    axios.get("http://192.168.1.20:3000/projects").then((response) => {
       setProjects(response.data);
     });
   };
@@ -52,14 +53,13 @@ function Home() {
   };
 
   const login = (data) => {
-    console.log(data)
-    axios.post("http://localhost:3000/auth/login", data)
+    axios.post("http://192.168.1.20:3000/auth/login", data)
     .then((response) => {
-      setCurrentUser(response.data) 
-      localStorage.setItem('auth_token', response.data.token);
+      handleAuth(response.data.token);
       history.push('/cms')
     })
-    .catch(() => {
+    .catch((e) => {
+      console.log(e)
       addToast("El email o contraseña es invalido", {
         appearance: 'error',
         autoDismiss: true,
