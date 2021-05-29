@@ -1,4 +1,4 @@
-import { useLocalStorage, writeStorage } from "@rehooks/local-storage";
+import { useLocalStorage, writeStorage, deleteFromStorage } from "@rehooks/local-storage";
 
 export default function useAuth() {
   const [authToken] = useLocalStorage("auth_token");
@@ -7,5 +7,11 @@ export default function useAuth() {
     writeStorage("auth_token", token);
   };
 
-  return { authToken, handleAuth };
+  const deleteSession = () => {
+
+    deleteFromStorage('auth_token');
+
+  };
+
+  return { authToken, handleAuth, deleteSession };
 }

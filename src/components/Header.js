@@ -2,9 +2,10 @@ import React from "react";
 import "../assets/styles/components/Header.scss";
 import logo from "../assets/images/vecindario-logo.svg";
 import menu from "../assets/images/menu.svg";
-import { Link } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { Link, useHistory, } from "react-router-dom";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { currentUserState, projectsListState } from "../atoms/atoms";
+import useAuth from "../hooks/useAuth";
 
 const Header = ({ openModal }) => {
   return (
@@ -20,7 +21,7 @@ const Header = ({ openModal }) => {
 };
 
 function Menu({ openModal }) {
-  const currentUser = useRecoilValue(currentUserState);
+  const [currentUser ] = useRecoilState(currentUserState);
 
   return (
     <div className="dropdown">
@@ -38,6 +39,16 @@ function Menu({ openModal }) {
 
 const DropDownCms = () => {
   const projects = useRecoilValue(projectsListState);
+  const setCurrentUser = useSetRecoilState(currentUserState);
+  const { deleteSession } = useAuth();
+  const history = useHistory();
+
+  const logOut = () => {
+    console.log('eliminando')
+    deleteSession()
+    setCurrentUser(null);
+    history.push('/')
+  }
 
   return (
     <>
@@ -59,6 +70,8 @@ const DropDownCms = () => {
           <Link to={`/detail_project/${project.id}`}>{project.name_project}</Link>
         ))}
       </div>
+      <hr />
+      <h4 onClick={logOut}>Cerrar sesion</h4>
     </>
   );
 };
