@@ -39,7 +39,7 @@ const CardProject = ({data}) => {
                     </div>
                 </div>
                 <p className="subsidy">{data.subsidy === false ? "No aplica subsidio" : "Aplica subsidio"}</p>
-                <Link to={`/leads/${data.id}`} className="btn__lead">Estoy interezado</Link>
+                <Link to={`/leads/${data.id}`} className="btn__lead">Estoy interesado</Link>
             </div>
         </div>
     );
