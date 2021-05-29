@@ -78,6 +78,9 @@ input[type=checkbox]:checked ~ .dropdown-content {
     display: block;
 }
 
+h4 {
+    cursor: pointer;
+}
 
 @media (min-width: 700px){
     .logo__header {
