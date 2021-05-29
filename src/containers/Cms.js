@@ -10,15 +10,15 @@ function Cms(){
 
     const currentUser = useRecoilValue(currentUserState);
     console.log("current user " + currentUser.name + " " + currentUser.last_name)
+    console.log("local   " + localStorage.getItem('auth_token'))
 
     const showUserProjects = () => {
         // requiere token de autorizacion
         let headers = {
-            headers: { 'Authorization': '' }
+            headers: { 'Authorization': localStorage.getItem('auth_token') }
         };
-        axios.get("http://localhost:3000/projects_by_user_id/", headers)
+        axios.get("http://localhost:3000/projects_by_user_id/", currentUser.id, headers)
     };
-
 
     return (
         <div className="cms">
@@ -32,7 +32,7 @@ function Cms(){
 
 const CMSWelcome = ({data}) => {
     return (
-        <p>Bienvenido <span>{data.name}</span> selecciona una acción en el menu de opciones</p>
+        <p>Bienvenido <span>{data.name}  {data.last_name}</span> selecciona una acción en el menu de opciones</p>
     )
 };
 

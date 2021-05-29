@@ -5,6 +5,7 @@ import menu from "../assets/images/menu.svg";
 import { Link } from "react-router-dom";
 
 
+
 const Header = ({openModal}) => {
     return(
         <header>
@@ -19,6 +20,7 @@ const Header = ({openModal}) => {
 }
 
 function Menu({openModal}) {
+
     return (
         <div className="dropdown">
             <label htmlFor="prueba" className="menu__button">
@@ -33,6 +35,7 @@ function Menu({openModal}) {
 }
 
 const DropDownCms = () => {
+
     return (
         <>
             <Link to="/cms/create_project" className="dropdown-content__title">+ Crear nuevo proyecto</Link>
