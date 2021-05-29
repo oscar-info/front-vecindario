@@ -28,8 +28,8 @@ function Home() {
     setModalIsOpen(true);
   }
 
-  const getProjects = () => {
-    axios.get("http://192.168.1.20:3000/projects").then((response) => {
+  const getAllProjects = () => {
+    axios.get("http://localhost:3000/projects").then((response) => {
       setProjects(response.data);
     });
   };
@@ -53,7 +53,7 @@ function Home() {
   };
 
   const login = (data) => {
-    axios.post("http://192.168.1.20:3000/auth/login", data)
+    axios.post("http://localhost:3000/auth/login", data)
     .then((response) => {
       handleAuth(response.data.token);
       history.push('/cms')
@@ -85,7 +85,7 @@ function Home() {
   };
 
   useEffect(() => {
-    getProjects();
+    getAllProjects();
   }, []);
 
   return (
