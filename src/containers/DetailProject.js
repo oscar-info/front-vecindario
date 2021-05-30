@@ -1,26 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
-import { Link, useHistory } from "react-router-dom";
+import { getProject } from "services/APIServices";
+import { useParams, Link } from "react-router-dom";
 import "../assets/styles/components/DetailProject.scss";
-import axios from "axios";
 import ProjectCard from "../components/ProjectCard";
 
 const DetailProject = () => {
+  const { id } = useParams();
+  const [project, setProject] = useState(null);
 
-  const history = useHistory();
-  const goLeads = () => {
-    history.push('/cms/leads')
-  }
+
+  useEffect(() => {
+    getProject(id)
+      .then(({ data }) => {
+        setProject(data);
+      })
+      .catch(() => {
+        //TODO handle errrors here
+      });
+  }, [id]);
 
   return (
     <>
       <Header />
-      <div className="container__detail--project">
-        <div className="container__projects">
-          <ProjectCard data />
+      {project && (
+        <div className="container__detail--project">
+          <div className="container__projects">
+            <ProjectCard data={project} />
+          </div>
+          <Link to={`/cms/leads/${project.id}`}>
+            <button className="btn__leads">Leads</button>
+          </Link>
         </div>
-        <button className="btn__leads" onClick={goLeads}>Leads</button>
-      </div>
+      )}
     </>
   );
 };
