@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/styles/components/Header.scss";
 import logo from "../assets/images/vecindario-logo.svg";
 import menu from "../assets/images/menu.svg";
-import { Link, useHistory, } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { currentUserState, projectsListState } from "../atoms/atoms";
 import useAuth from "../hooks/useAuth";
+
 
 const Header = ({ openModal }) => {
   return (
@@ -21,7 +22,7 @@ const Header = ({ openModal }) => {
 };
 
 function Menu({ openModal }) {
-  const [currentUser ] = useRecoilState(currentUserState);
+  const [currentUser] = useRecoilState(currentUserState);
 
   return (
     <div className="dropdown">
@@ -40,15 +41,30 @@ function Menu({ openModal }) {
 const DropDownCms = () => {
   const projects = useRecoilValue(projectsListState);
   const setCurrentUser = useSetRecoilState(currentUserState);
+  const [filteredProjects, setFilteredProjects] = useState(projects);
   const { deleteSession } = useAuth();
   const history = useHistory();
 
+  useEffect(() => {
+    setFilteredProjects(projects);
+  }, [projects]);
+
   const logOut = () => {
-    console.log('eliminando')
-    deleteSession()
+    console.log("eliminando");
+    deleteSession();
     setCurrentUser(null);
-    history.push('/')
-  }
+    history.push("/");
+  };
+
+  const filterProjects = (query) => {
+ 
+    if (query === " ") setFilteredProjects(projects);
+
+    let filtered = projects.filter((project) => {
+      return project.name_project.toLowerCase().startsWith(query.toLowerCase());
+    });
+    setFilteredProjects(filtered);
+  };
 
   return (
     <>
@@ -59,6 +75,9 @@ const DropDownCms = () => {
         type="search"
         id="site-search"
         placeholder="Buscar"
+        onChange={(e) => {
+          filterProjects(e.target.value);
+        }}
         name="searchBar"
         aria-label="Search in my projects"
         autoFocus
@@ -66,11 +85,14 @@ const DropDownCms = () => {
       <h3>Proyectos Activos</h3>
       <hr />
       <div className="listProyects">
-        { projects.length === 0 && "No tiene projectos"}
-        {projects.map((project) => (
-          <>
-            <Link to={`/cms/detail_project/${project.id}`}>{project.name_project}</Link><br/>
-          </>
+        {projects.length === 0 && "No tiene projectos"}
+        {filteredProjects.map((project) => (
+          <div key={project.id}>
+            <Link to={`/cms/detail_project/${project.id}`} >
+              {project.name_project}
+            </Link>
+            <br />
+          </div>
         ))}
       </div>
       <hr />
