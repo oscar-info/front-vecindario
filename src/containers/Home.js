@@ -75,7 +75,7 @@ function Home() {
         appearance: 'success',
         autoDismiss: true,
       })
-      history.push('//auth/login')
+      history.push('/auth/login')
     })
     .catch(() => {
       addToast("Su cuenta no pudo ser creada, verifique todos los campos", {
