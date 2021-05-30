@@ -21,11 +21,15 @@ const getProjects = (id) => {
 };
 
 const createProject = (data) => {
-  return axios.post('http://localhost:3000/', data, {
+  return axios.post('http://localhost:3000/projects', data, {
     headers: {
       Authorization: token,
     },
   });
 };
 
-export { getCurrentUser, getProjects, createProject };
+const getLeads = (id) => {
+  return axios.get(`http://localhost:3000/leads_by_project_id/${id}`);
+};
+
+export { getCurrentUser, getProjects, createProject, getLeads };
