@@ -1,27 +1,28 @@
-import React from 'react';
-import Header from '../components/Header';
-import { Link } from "react-router-dom";
-import '../assets/styles/components/DetailProject.scss';
-import axios from 'axios';
-// import CardProject from '../components/ProjectCard';
+import React from "react";
+import Header from "../components/Header";
+import { Link, useHistory } from "react-router-dom";
+import "../assets/styles/components/DetailProject.scss";
+import axios from "axios";
+import ProjectCard from "../components/ProjectCard";
 
 const DetailProject = () => {
 
-    const updateProject = () => {
-        // requiere token de autorizacion
-        axios.put("http://localhost:3000/projects/6")
-    };
+  const history = useHistory();
+  const goLeads = () => {
+    history.push('/cms/leads')
+  }
 
-
-    return (
-        <>
-            <Header/>
-            {/* <CardProject/> */}
-            <Link to='/cms/leads'>
-                <button className="btn__leads">Leads</button>
-            </Link>
-        </>
-    )
+  return (
+    <>
+      <Header />
+      <div className="container__detail--project">
+        <div className="container__projects">
+          <ProjectCard data />
+        </div>
+        <button className="btn__leads" onClick={goLeads}>Leads</button>
+      </div>
+    </>
+  );
 };
 
-export default DetailProject
+export default DetailProject;

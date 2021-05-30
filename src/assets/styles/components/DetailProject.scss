@@ -1,18 +1,20 @@
 @import '../Var.scss';
 
+.container__detail--project {
+    display: flex;
+    flex-direction: column;
+}
+
 .btn__leads {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
     margin: 2rem auto;
     width: 144px;
     height: 30px;
-    border: 1px solid $color-primary;
+    border: 2px solid $color-primary;
     border-radius: 27px;
     color: $color-grey;
     font-weight: bold;
     font-size: 1.4rem;
     line-height: 21px;
     background-color: $color-white;
+    text-align: center;
 }
