@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 import axios from "axios";
 
@@ -20,6 +20,14 @@ const getProjects = (id) => {
   });
 };
 
+const getProject = (id) => {
+  return axios.get(`http://localhost:3000/projects/${id}`, {
+    headers: {
+      Authorization: token,
+    },
+  });
+};
+
 const createProject = (data) => {
   return axios.post('http://localhost:3000/projects', data, {
     headers: {
@@ -32,4 +40,4 @@ const getLeads = (id) => {
   return axios.get(`http://localhost:3000/leads_by_project_id/${id}`);
 };
 
-export { getCurrentUser, getProjects, createProject, getLeads };
+export { getCurrentUser, getProjects, createProject, getLeads, getProject };
