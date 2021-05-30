@@ -66,8 +66,11 @@ const DropDownCms = () => {
       <h3>Proyectos Activos</h3>
       <hr />
       <div className="listProyects">
+        { projects.length === 0 && "No tiene projectos"}
         {projects.map((project) => (
-          <Link to={`/detail_project/${project.id}`}>{project.name_project}</Link>
+          <>
+            <Link to={`/cms/detail_project/${project.id}`}>{project.name_project}</Link><br/>
+          </>
         ))}
       </div>
       <hr />
