@@ -142,6 +142,7 @@ const FormModal = ({type = '', isOpen, onRequestClose, onSubmit }) => {
 
     return (
         <ReactModal 
+            ariaHideApp={false}
             isOpen={isOpen} 
             onRequestClose={onRequestClose}
             className="continer__formModal" shouldCloseOnOverlayClick={true}
