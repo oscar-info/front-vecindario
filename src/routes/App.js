@@ -15,7 +15,7 @@ import { ToastProvider } from "react-toast-notifications";
 import { useSetRecoilState } from "recoil";
 import { currentUserState, projectsListState } from "../atoms/atoms";
 import useAuth from "../hooks/useAuth";
-import { getProjects, getCurrentUser } from "services/APIServices";
+import useAPI from "services/APIServices";
 
 
 const PrivateRoute = (props) => {
@@ -37,9 +37,11 @@ const App = () => {
   const { authToken } = useAuth();
   const setCurrentUser = useSetRecoilState(currentUserState);
   const setProjects = useSetRecoilState(projectsListState);
+  const { getCurrentUser, getProjects } = useAPI();
 
   useEffect(() => {
     if (authToken) {
+      
       async function fetchInitialData() {
         let currentUser = await getCurrentUser();
         setCurrentUser(currentUser.data);
@@ -49,7 +51,7 @@ const App = () => {
 
       fetchInitialData();
     }
-  }, [authToken, setCurrentUser, setProjects]);
+  }, [authToken, setCurrentUser, setProjects, getCurrentUser, getProjects]);
 
   return (
     <>

@@ -3,7 +3,7 @@ import "../assets/styles/components/CreateProject.scss";
 import { Link, useHistory } from "react-router-dom";
 import imgBack from "../assets/images/arrow-left-circle.svg";
 import { useForm } from "react-hook-form";
-import { createProject } from "services/APIServices";
+import useAPI from "services/APIServices";
 import { useToasts } from "react-toast-notifications";
 import { useSetRecoilState } from "recoil";
 import { projectsListState } from "../atoms/atoms";
@@ -12,6 +12,7 @@ const CreateProject = () => {
   const { addToast } = useToasts();
   const history = useHistory();
   const setProjectListState = useSetRecoilState(projectsListState);
+  const { createProject } = useAPI();
 
   const {
     register,

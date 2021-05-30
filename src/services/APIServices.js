@@ -1,43 +1,48 @@
 //"use strict";
 
 import axios from "axios";
+import useAuth from "hooks/useAuth";
+import { useCallback } from "react";
 
-const token = localStorage.getItem("auth_token");
+export default function useAPI() {
+  const { authToken } = useAuth();
+  console.log(authToken)
 
-const getCurrentUser = () => {
-  return axios.get("http://localhost:3000/current_user", {
-    headers: {
-      Authorization: token,
-    },
-  });
-};
+  const getCurrentUser = useCallback(() => {
+    return axios.get("http://localhost:3000/current_user", {
+      headers: {
+        Authorization: authToken,
+      },
+    });
+  }, [authToken]);
 
-const getProjects = (id) => {
-  return axios.get(`http://localhost:3000/projects_by_user_id/${id}`, {
-    headers: {
-      Authorization: token,
-    },
-  });
-};
+  const getProjects = useCallback((id) => {
+    return axios.get(`http://localhost:3000/projects_by_user_id/${id}`, {
+      headers: {
+        Authorization: authToken,
+      },
+    });
+  }, [authToken]);
 
-const getProject = (id) => {
-  return axios.get(`http://localhost:3000/projects/${id}`, {
-    headers: {
-      Authorization: token,
-    },
-  });
-};
+  const getProject = useCallback((id) => {
+    return axios.get(`http://localhost:3000/projects/${id}`, {
+      headers: {
+        Authorization: authToken,
+      },
+    });
+  }, [authToken]);
 
-const createProject = (data) => {
-  return axios.post('http://localhost:3000/projects', data, {
-    headers: {
-      Authorization: token,
-    },
-  });
-};
+  const createProject = useCallback((data) => {
+    return axios.post("http://localhost:3000/projects", data, {
+      headers: {
+        Authorization: authToken,
+      },
+    });
+  }, [authToken]);
 
-const getLeads = (id) => {
-  return axios.get(`http://localhost:3000/leads_by_project_id/${id}`);
-};
+  const getLeads = useCallback((id) => {
+    return axios.get(`http://localhost:3000/leads_by_project_id/${id}`);
+  }, []);
 
-export { getCurrentUser, getProjects, createProject, getLeads, getProject };
+  return { getProject, getProjects, getLeads, createProject, getCurrentUser };
+}

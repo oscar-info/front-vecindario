@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
-import { getProject } from "services/APIServices";
+import useAPI from "services/APIServices";
 import { useParams, Link } from "react-router-dom";
 import "../assets/styles/components/DetailProject.scss";
 import ProjectCard from "../components/ProjectCard";
@@ -8,6 +8,8 @@ import ProjectCard from "../components/ProjectCard";
 const DetailProject = () => {
   const { id } = useParams();
   const [project, setProject] = useState(null);
+  const { getProject } = useAPI();
+  
 
 
   useEffect(() => {
@@ -18,7 +20,7 @@ const DetailProject = () => {
       .catch(() => {
         //TODO handle errrors here
       });
-  }, [id]);
+  }, [id, getProject]);
 
   return (
     <>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import "../assets/styles/components/Leads.scss";
 import { useToasts } from "react-toast-notifications";
-import { getLeads, getProject } from "services/APIServices";
+import useAPI from "services/APIServices";
 import { useParams } from "react-router";
 
 const Leads = () => {
@@ -10,10 +10,9 @@ const Leads = () => {
   const [leads, setLeads] = useState([]);
   const [project, setProject] = useState({});
   const { id } = useParams();
-
+  const { getProject, getLeads } = useAPI();
 
   useEffect(() => {
-
     getProject(id).then(({ data }) => {
       setProject(data);
     });
@@ -30,7 +29,7 @@ const Leads = () => {
           });
         }
       });
-  }, [id, addToast]);
+  }, [id, addToast, getLeads, getProject]);
 
   return (
     <>
