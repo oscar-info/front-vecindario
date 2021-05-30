@@ -1,73 +1,81 @@
-import React from 'react';
-import axios from 'axios';
-import Header from '../components/Header';
-import '../assets/styles/components/Leads.scss';
-
+import React, { useEffect, useState } from "react";
+import Header from "../components/Header";
+import "../assets/styles/components/Leads.scss";
+import { useToasts } from "react-toast-notifications";
+import { getLeads, getProject } from "services/APIServices";
+import { useParams } from "react-router";
 
 const Leads = () => {
+  const { addToast } = useToasts();
+  const [leads, setLeads] = useState([]);
+  const [project, setProject] = useState({});
+  const { id } = useParams();
 
-    const showLeads = () => {
-        // requiere token de autorizacion
-        axios.get("http://localhost:3000/leads_by_project_id/2")
-    };
 
-    return (
-        <>
-            <Header/>
-            <div className="container__cms--leads">
-                <div>
-                    <h2>Kamelot</h2>
-                    <div className="resum__leads">
-                        <p>4</p>
-                    </div>
-                </div>
-                <section className="table__leads">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Fecha</th> 
-                                <th>Email</th>
-                                <th>Telefono</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Oscar Eduardo Info Giraldo</td>
-                                <td>12/04/2021</td>
-                                <td>prueba@gmail.com</td>
-                                <td>3192337645</td>
-                            </tr>
-                            <tr>
-                                <td>Eve</td>
-                                <td>Jackson</td>
-                                <td>94</td>
-                                <td>50</td>
-                            </tr>
-                            <tr>
-                                <td>Eve</td>
-                                <td>Jackson</td>
-                                <td>94</td>
-                                <td>50</td>
-                            </tr>
-                            <tr>
-                                <td>Eve</td>
-                                <td>Jackson</td>
-                                <td>94</td>
-                                <td>50</td>
-                            </tr>
-                            <tr>
-                                <td>Eve</td>
-                                <td>Jackson</td>
-                                <td>94</td>
-                                <td>50</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+  useEffect(() => {
+
+    getProject(id).then(({ data }) => {
+      setProject(data);
+    });
+
+    getLeads(id)
+      .then(({ data }) => {
+        setLeads(data);
+      })
+      .catch((error) => {
+        if (error.response.status !== 404) {
+          addToast("Los leads no pudiron ser cargados", {
+            appearance: "error",
+            autoDismiss: true,
+          });
+        }
+      });
+  }, [id, addToast]);
+
+  return (
+    <>
+      <Header />
+      <div className="container__cms--leads">
+        {leads.length === 0 && <h2>Este proyecto no tiene leads</h2>}
+        {leads.length > 0 && (
+          <>
+            <div>
+              <h2>{project.name_project}</h2>
+              <div className="resum__leads">
+                <p>{leads.length}</p>
+              </div>
             </div>
-        </>
-    )
+            <section className="table__leads">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Email</th>
+                    <th>Telefono</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {leads.map((lead) => {
+                    return (
+                      <tr key={lead.id}>
+                        <td>{lead.name}</td>
+                        <td>
+                          {new Date(lead.created_at).toLocaleDateString()}
+                        </td>
+                        <td>{lead.email}</td>
+                        <td>{lead.phone}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </section>
+          </>
+        )}
+      </div>
+    </>
+  );
 };
 
 export default Leads;
