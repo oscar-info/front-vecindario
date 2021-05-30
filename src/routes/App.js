@@ -17,6 +17,7 @@ import { currentUserState, projectsListState } from "../atoms/atoms";
 import useAuth from "../hooks/useAuth";
 import { getProjects, getCurrentUser } from "services/APIServices";
 
+
 const PrivateRoute = (props) => {
   const { authToken } = useAuth();
   const Component = props.component;
@@ -67,7 +68,7 @@ const App = () => {
             <PrivateRoute exact path="/cms/create_project" component={CreateProject} />
             <PrivateRoute exact path="/cms/update_project" component={CreateProject} />
             <PrivateRoute exact path="/cms/detail_project/:id" component={DetailProject} />
-            <PrivateRoute exact path="/cms/leads" component={Leads} />
+            <PrivateRoute exact path="/cms/leads/:id" component={Leads} />
             <Redirect to="/" />
           </Switch>
         </Router>
