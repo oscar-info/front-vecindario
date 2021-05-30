@@ -1,27 +1,31 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 import "../assets/styles/components/CreateProject.scss";
 import { Link, useHistory } from "react-router-dom";
 import imgBack from "../assets/images/arrow-left-circle.svg";
 import { useForm } from "react-hook-form";
 import { createProject } from "services/APIServices";
 import { useToasts } from "react-toast-notifications";
+import { useSetRecoilState } from "recoil";
+import { projectsListState } from "../atoms/atoms";
 
 const CreateProject = () => {
   const { addToast } = useToasts();
   const history = useHistory();
-  const [project] = useState([]);
+  const setProjectListState = useSetRecoilState(projectsListState);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
     const list_emails = data.list_emails.split(" ");
     createProject({ ...data, list_emails: list_emails })
       .then((response) => {
-        project.push(response.data);
+        setProjectListState((projects) => {
+          return [...projects, response.data];
+        });
         addToast("Su informacion fue enviada exitosamente", {
           appearance: "success",
           autoDismiss: true,
