@@ -29,14 +29,14 @@ function Home() {
   }
 
   const getAllProjects = () => {
-    axios.get("http://localhost:3000/projects").then((response) => {
+    axios.get("http://app-vecindario.herokuapp.com/projects").then((response) => {
       setProjects(response.data);
     });
   };
 
 
   const createLead = (data) => {
-    axios.post("http://localhost:3000/leads", {...data, project_id: projectId})
+    axios.post("http://app-vecindario.herokuapp.com/leads", {...data, project_id: projectId})
     .then((response) => {
       leads.push(response.data);
       addToast("Su informacion fue enviada exitosamente", {
@@ -53,7 +53,7 @@ function Home() {
   };
 
   const login = (data) => {
-    axios.post("http://localhost:3000/auth/login", data)
+    axios.post("http://app-vecindario.herokuapp.com/auth/login", data)
     .then((response) => {
       handleAuth(response.data.token);
       history.push('/cms')
@@ -67,7 +67,7 @@ function Home() {
   };
 
   const createUser = (data) => {
-    axios.post("http://localhost:3000/users", data)
+    axios.post("http://app-vecindario.herokuapp.com/users", data)
     .then((response) => {
       user.push(response.data);
       setUser(response.data);
