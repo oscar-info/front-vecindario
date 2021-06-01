@@ -122,8 +122,8 @@ const CreateProject = () => {
 
           <span>Aplica subsidio VIS?:</span>
           <select {...register("subsidy", { required: true })}>
-            <option value="si">Si</option>
-            <option value="no">No</option>
+            <option value="true">Si</option>
+            <option value="false">No</option>
           </select>
           {errors.subsidy?.type === "required" && (
             <span className="errors">Debe seleccionar una opción</span>
@@ -143,8 +143,8 @@ const CreateProject = () => {
 
           <span>Incluye Parqueadero?</span>
           <select {...register("parking", { required: true })}>
-            <option value="si">Si</option>
-            <option value="no">No</option>
+            <option value="true">Si</option>
+            <option value="false">No</option>
           </select>
           {errors.parking?.type === "required" && (
             <span className="errors">Debe seleccionar una opción</span>
