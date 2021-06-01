@@ -11,9 +11,9 @@ import useAuth from "../hooks/useAuth";
 const Header = ({ openModal }) => {
   return (
     <header>
-      <div className="logo__header">
+      <Link to='/home' className="logo__header">
         <img src={logo} alt="Logo Vecindario" />
-      </div>
+      </Link>
       <div className="nav__container">
         <Menu openModal={openModal} />
       </div>
