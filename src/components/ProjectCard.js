@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const CardProject = ({data}) => {
 
     return (
-        <div className="animate__animated animate__backInUp container__card--project">
+        <div className="animate__animated animate__fadeInUp container__card--project">
             <div className="card__project--header">
                 <h2 className="name_project" id={data.id}>{data.name_project}</h2>
                 <h3 className="type_project">{data.type_project}</h3>
