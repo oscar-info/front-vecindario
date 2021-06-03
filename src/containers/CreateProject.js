@@ -1,109 +1,173 @@
-import React from 'react'
-import "../assets/styles/components/CreateProject.scss"
-import Header from "../components/Header"
+import React from "react";
+import "../assets/styles/components/CreateProject.scss";
+import { Link, useHistory } from "react-router-dom";
+import imgBack from "../assets/images/arrow-left-circle.svg";
+import { useForm } from "react-hook-form";
+import useAPI from "services/APIServices";
+import { useToasts } from "react-toast-notifications";
+import { useSetRecoilState } from "recoil";
+import { projectsListState } from "../atoms/atoms";
 
 const CreateProject = () => {
-    return (
-        <>
-        <Header/>
-        <div className="container__form--project">
-            formulario
-            <form>
-                <input
-                    type="text"
-                    name='name_project'
-                    placeholder={"Nombre Proyecto"}
-                    className="card__title input-txt"
-                    autoFocus
-                    required
-                ></input>
+  const { addToast } = useToasts();
+  const history = useHistory();
+  const setProjectListState = useSetRecoilState(projectsListState);
+  const { createProject } = useAPI();
 
-                <p>Tipo Projecto:</p>
-                <input type="radio" id="residencial" name="type" value="residencial" />
-                <label for="residencial">Residencial</label>
-                <input type="radio" id="comercial" name="type" value="comercial" /> 
-                <label for="comercial">Comercial</label>
-                <input type="radio" id="industrial" name="type" value="industrial" />
-                <label for="industrial">Industrial</label>
-                <input type="radio" id="lotes" name="type" value="lotes" />
-                <label for="lotes">Lotes</label>
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-                <input
-                    type="text"
-                    name='ciudad'
-                    placeholder={"Ciudad"}
-                    className="card__title input-txt"
-                    required
-                ></input>
+  const onSubmit = (data) => {
+    const list_emails = data.list_emails.split(" ");
+    createProject({ ...data, list_emails: list_emails })
+      .then((response) => {
+        setProjectListState((projects) => {
+          return [...projects, response.data];
+        });
+        addToast("Su informacion fue enviada exitosamente", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+        history.push("/cms");
+      })
+      .catch(() => {
+        addToast("Su informacion no pudo ser enviada", {
+          appearance: "error",
+          autoDismiss: true,
+        });
+      });
+  };
 
-                <input
-                    type="text"
-                    name='direccion'
-                    placeholder={"Direccion"}
-                    className="card__title input-txt"
-                    required
-                ></input>
+  return (
+    <div className="container_newProject">
+      <Link to="/cms" className="btn_back">
+        <img src={imgBack} alt="return cms page"></img>
+      </Link>
+      <div className="container__form--project">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input
+            type="text"
+            name="name_project"
+            placeholder={"Nombre Proyecto"}
+            className="input-txt"
+            autoFocus
+            {...register("name_project", { required: true })}
+          />
+          {errors.name_project?.type === "required" && (
+            <span className="errors">Este campo es requerido</span>
+          )}
+          <hr />
 
-                <input
-                    type="text"
-                    name='precio'
-                    placeholder={"Precio"}
-                    className="card__title input-txt"
-                    required
-                ></input>
+          <span>Tipo Projecto:</span>
+          <select {...register("type_project", { required: true })}>
+            <option value="residencial">Residencial</option>
+            <option value="comercial">Comercial</option>
+            <option value="industrial">Industrial</option>
+            <option value="lotes">Lotes</option>
+          </select>
+          {errors.type_project?.type === "required" && (
+            <span className="errors">Debe seleccionar una opción</span>
+          )}
 
-                <p>Areas:</p>
-                <>
-                    <input
-                        type="text"
-                        name='privada'
-                        placeholder={"Privada"}
-                        className="card__title input-txt"
-                        required
-                    ></input>
-                    <input
-                    type="text"
-                    name='construida'
-                    placeholder={"Construida"}
-                    className="card__title input-txt"
-                    required
-                    ></input>
-                </>
+          <input
+            type="text"
+            name="ciudad"
+            placeholder={"Ciudad"}
+            className="input-txt"
+            {...register("city", { required: true })}
+          />
+          {errors.city?.type === "required" && (
+            <span className="errors">Este campo es requerido</span>
+          )}
+          <hr />
 
-                <p>Aplica subsidio VIS?:</p>
-                <input type="radio" id="si_subsidy" name="type" value="si" />
-                <label for="si_subsidy">Si</label>
-                <input type="radio" id="no_subsidy" name="type" value="no" /> 
-                <label for="no_subsidy">No</label>
+          <input
+            type="text"
+            name="direccion"
+            placeholder={"Dirección"}
+            className="input-txt"
+            {...register("address", { required: true })}
+          />
+          {errors.address?.type === "required" && (
+            <span className="errors">Este campo es requerido</span>
+          )}
+          <hr />
 
-                <input
-                    type="text"
-                    name='restroom'
-                    placeholder={"Numero Baños"}
-                    className="card__title input-txt"
-                    required
-                ></input>
+          <input
+            type="text"
+            name="precio"
+            placeholder={"Precio"}
+            className="input-txt"
+            {...register("price", { required: true })}
+          />
+          {errors.price?.type === "required" && (
+            <span className="errors">Este campo es requerido</span>
+          )}
+          <hr />
 
-                <p>Incluye Parqueadero?:</p>
-                <input type="radio" id="si_parking" name="type" value="si" />
-                <label for="si_parking">Si</label>
-                <input type="radio" id="no_parking" name="type" value="no" /> 
-                <label for="no_parking">No</label>
+          <input
+            type="text"
+            name="area"
+            placeholder={"Area"}
+            className="input-txt"
+            {...register("area", { required: true })}
+          />
+          {errors.area?.type === "required" && (
+            <span className="errors">Este campo es requerido</span>
+          )}
+          <hr />
 
-                <input
-                    type="text"
-                    name='listEmails'
-                    placeholder={"Lista correos sala de ventas"}
-                    className="card__title input-txt"
-                    required
-                ></input>
-                <button className="card__btnPost" type='submit'>
-                    Crear Projecto
-                </button>
-            </form>
-        </div>
-        </>
-    );
+          <span>Aplica subsidio VIS?:</span>
+          <select {...register("subsidy", { required: true })}>
+            <option value="true">Si</option>
+            <option value="false">No</option>
+          </select>
+          {errors.subsidy?.type === "required" && (
+            <span className="errors">Debe seleccionar una opción</span>
+          )}
+
+          <input
+            type="text"
+            name="restroom"
+            placeholder={"Numero Baños"}
+            className="card__title input-txt"
+            {...register("restroom", { required: true })}
+          />
+          {errors.restroom?.type === "required" && (
+            <span className="errors">Este campo es requerido</span>
+          )}
+          <hr />
+
+          <span>Incluye Parqueadero?</span>
+          <select {...register("parking", { required: true })}>
+            <option value="true">Si</option>
+            <option value="false">No</option>
+          </select>
+          {errors.parking?.type === "required" && (
+            <span className="errors">Debe seleccionar una opción</span>
+          )}
+
+          <input
+            type="text"
+            name="listEmails"
+            placeholder={"Lista correos sala de ventas"}
+            className="card__title input-txt"
+            {...register("list_emails", { required: true })}
+          />
+          {errors.list_emails?.type === "required" && (
+            <span className="errors">Este campo es requerido</span>
+          )}
+          <hr />
+          <button className="btn_createProject" type="submit">
+            Crear Projecto
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default CreateProject;

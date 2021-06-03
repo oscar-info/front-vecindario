@@ -1,12 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './routes/App';
-import './assets/styles/index.scss'
-
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./routes/App";
+import { RecoilRoot } from "recoil";
+import "./assets/styles/index.scss";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RecoilRoot>
+      <App />
+    </RecoilRoot>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );

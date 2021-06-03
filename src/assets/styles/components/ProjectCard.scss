@@ -2,13 +2,14 @@
 
 .container__card--project {
     padding: 2rem 1rem;
-    border: 0.5px solid $color-black;
+    border: 0.5px solid $color-secondary;
+    margin: 1rem;
 }
 
 .card__project--header{
     .name_project{
         font-size: 1.8rem;
-        color: $color-black;
+        color: $color-secondary;
         font-weight: bold;
     }
 
@@ -30,7 +31,7 @@
     }
 
     .address {
-        color: $color-black;
+        color: $color-secondary;
     }
 }
 
@@ -44,7 +45,7 @@
     }
 
     .price {
-        color: $color-black;
+        color: $color-secondary;
         font-size: 1.8rem;
         font-weight: bold;
     }
@@ -62,12 +63,17 @@
     align-content: center;
     justify-content: space-evenly;
     text-align: center;
+
+    img {
+        width: 100%;
+        height: auto;
+    }
 }
 
 .btn__lead {
     border: none;
     background-color: $color-primary;
-    color: $color-black;
+    color: $color-secondary;
     font-weight: bold;
     font-size: 1.4rem;
     border-radius: 2.7rem;

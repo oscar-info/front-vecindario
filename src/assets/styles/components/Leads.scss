@@ -1,0 +1,60 @@
+@import "../Var.scss";
+
+.container__cms--leads {
+    margin: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+        text-align: center;
+        color: $color-secondary;
+    }
+}
+
+.resum__leads {
+    width: 152px;
+    height: 54px;
+    border-radius: 5px;
+    background-color: $color-bg-footer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin: 2rem 0;
+}
+
+.table__leads {
+    text-align: center;
+
+    tbody tr:nth-child(odd) {
+        background-color: #ccc;
+    }
+
+    thead {
+        font-size: 1.4rem;
+
+        th {
+            width: 10rem;
+        }
+    }
+
+    td {
+        width: 10rem;
+    }
+}
+
+@media (min-width: 700px) {
+    h2{
+        font-size: 2.6rem;
+    }
+    .table__leads {
+        font-size: 1.8rem;
+
+        td {
+            width: 22rem;
+        }
+    }
+
+}
