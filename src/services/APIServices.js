@@ -6,10 +6,9 @@ import { useCallback } from "react";
 
 export default function useAPI() {
   const { authToken } = useAuth();
-  console.log(authToken)
 
   const getCurrentUser = useCallback(() => {
-    return axios.get("https://app-vecindario.herokuapp.com/current_user", {
+    return axios.get(`${process.env.REACT_APP_API}/current_user`, {
       headers: {
         Authorization: authToken,
       },
@@ -17,7 +16,7 @@ export default function useAPI() {
   }, [authToken]);
 
   const getProjects = useCallback((id) => {
-    return axios.get(`https://app-vecindario.herokuapp.com/projects_by_user_id/${id}`, {
+    return axios.get(`${process.env.REACT_APP_API}/projects_by_user_id/${id}`, {
       headers: {
         Authorization: authToken,
       },
@@ -25,7 +24,7 @@ export default function useAPI() {
   }, [authToken]);
 
   const getProject = useCallback((id) => {
-    return axios.get(`https://app-vecindario.herokuapp.com/projects/${id}`, {
+    return axios.get(`${process.env.REACT_APP_API}/projects/${id}`, {
       headers: {
         Authorization: authToken,
       },
@@ -33,7 +32,7 @@ export default function useAPI() {
   }, [authToken]);
 
   const createProject = useCallback((data) => {
-    return axios.post("https://app-vecindario.herokuapp.com/projects", data, {
+    return axios.post(`${process.env.REACT_APP_API}/projects`, data, {
       headers: {
         Authorization: authToken,
       },
@@ -41,7 +40,7 @@ export default function useAPI() {
   }, [authToken]);
 
   const getLeads = useCallback((id) => {
-    return axios.get(`https://app-vecindario.herokuapp.com/leads_by_project_id/${id}`);
+    return axios.get(`${process.env.REACT_APP_API}/leads_by_project_id/${id}`);
   }, []);
 
   return { getProject, getProjects, getLeads, createProject, getCurrentUser };
