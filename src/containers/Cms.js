@@ -16,10 +16,10 @@ function Cms() {
       <div className="container__cms">
         {currentUser && (
           <p>
-            Bienvenido 
+            Bienvenido&nbsp;
             <span>
                {currentUser.name} {currentUser.last_name} 
-            </span>
+            </span>&nbsp;
              selecciona una acción en el menu de opciones
           </p>
         )}

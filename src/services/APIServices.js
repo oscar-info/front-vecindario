@@ -7,7 +7,6 @@ import { trackPromise } from 'react-promise-tracker';
 
 export default function useAPI() {
   const { authToken } = useAuth();
-  console.log(authToken)
 
   const getCurrentUser = useCallback(() => {
     return axios.get(`${process.env.REACT_APP_API}/current_user`, {
