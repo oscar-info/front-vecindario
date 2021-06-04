@@ -3,6 +3,7 @@
 import axios from "axios";
 import useAuth from "hooks/useAuth";
 import { useCallback } from "react";
+import { trackPromise } from 'react-promise-tracker';
 
 export default function useAPI() {
   const { authToken } = useAuth();
@@ -24,23 +25,23 @@ export default function useAPI() {
   }, [authToken]);
 
   const getProject = useCallback((id) => {
-    return axios.get(`${process.env.REACT_APP_API}/projects/${id}`, {
+    return trackPromise( axios.get(`${process.env.REACT_APP_API}/projects/${id}`, {
       headers: {
         Authorization: authToken,
       },
-    });
+    }));
   }, [authToken]);
 
   const createProject = useCallback((data) => {
-    return axios.post(`${process.env.REACT_APP_API}/projects`, data, {
+    return trackPromise( axios.post(`${process.env.REACT_APP_API}/projects`, data, {
       headers: {
         Authorization: authToken,
       },
-    });
+    }));
   }, [authToken]);
 
   const getLeads = useCallback((id) => {
-    return axios.get(`${process.env.REACT_APP_API}/leads_by_project_id/${id}`);
+    return trackPromise( axios.get(`${process.env.REACT_APP_API}/leads_by_project_id/${id}`));
   }, []);
 
   return { getProject, getProjects, getLeads, createProject, getCurrentUser };

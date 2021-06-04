@@ -4,6 +4,7 @@ import "../assets/styles/components/Leads.scss";
 import { useToasts } from "react-toast-notifications";
 import useAPI from "services/APIServices";
 import { useParams } from "react-router";
+import LoadingSpinner from "components/LoadingSpinner";
 
 const Leads = () => {
   const { addToast } = useToasts();
@@ -34,6 +35,7 @@ const Leads = () => {
   return (
     <>
       <Header />
+      <LoadingSpinner/>
       <div className="container__cms--leads">
         {leads.length === 0 && <h2>Este proyecto no tiene leads</h2>}
         {leads.length > 0 && (
