@@ -32,7 +32,7 @@ function Home() {
 
   const getAllProjects = () => {
     trackPromise(
-    axios.get("https://app-vecindario.herokuapp.com/projects").then((response) => {
+    axios.get(`${process.env.REACT_APP_API}/projects`).then((response) => {
       setProjects(response.data);
     })
     );
@@ -41,7 +41,7 @@ function Home() {
 
   const createLead = (data) => {
     trackPromise(
-    axios.post("https://app-vecindario.herokuapp.com/leads", {...data, project_id: projectId})
+    axios.post(`${process.env.REACT_APP_API}/leads`, {...data, project_id: projectId})
     .then((response) => {
       leads.push(response.data);
       addToast("Su informacion fue enviada exitosamente", {
@@ -59,7 +59,7 @@ function Home() {
 
   const login = (data) => {
     trackPromise(
-    axios.post("https://app-vecindario.herokuapp.com/auth/login", data)
+    axios.post(`${process.env.REACT_APP_API}/auth/login`, data)
     .then((response) => {
       handleAuth(response.data.token);
       history.push('/cms')
@@ -74,7 +74,7 @@ function Home() {
 
   const createUser = (data) => {
     trackPromise(
-    axios.post("https://app-vecindario.herokuapp.com/users", data)
+    axios.post(`${process.env.REACT_APP_API}/users`, data)
     .then((response) => {
       user.push(response.data);
       setUser(response.data);
