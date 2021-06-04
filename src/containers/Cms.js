@@ -3,6 +3,7 @@ import "../assets/styles/components/Cms.scss";
 import Header from "../components/Header";
 import { useRecoilValue } from "recoil";
 import { currentUserState } from "../atoms/atoms";
+import LoadingSpinner from "components/LoadingSpinner";
 
 function Cms() {
 
@@ -11,6 +12,7 @@ function Cms() {
   return (
     <div className="cms">
       <Header />
+      <LoadingSpinner/>
       <div className="container__cms">
         {currentUser && (
           <p>

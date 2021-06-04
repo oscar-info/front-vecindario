@@ -4,6 +4,7 @@ import useAPI from "services/APIServices";
 import { useParams, Link } from "react-router-dom";
 import "../assets/styles/components/DetailProject.scss";
 import ProjectCard from "../components/ProjectCard";
+import LoadingSpinner from "components/LoadingSpinner";
 
 const DetailProject = () => {
   const { id } = useParams();
@@ -25,6 +26,7 @@ const DetailProject = () => {
   return (
     <>
       <Header />
+      <LoadingSpinner/>
       {project && (
         <div className="container__detail--project">
           <div className="container__projects">

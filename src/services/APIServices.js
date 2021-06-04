@@ -3,6 +3,7 @@
 import axios from "axios";
 import useAuth from "hooks/useAuth";
 import { useCallback } from "react";
+import { trackPromise } from 'react-promise-tracker';
 
 export default function useAPI() {
   const { authToken } = useAuth();
@@ -25,23 +26,23 @@ export default function useAPI() {
   }, [authToken]);
 
   const getProject = useCallback((id) => {
-    return axios.get(`https://app-vecindario.herokuapp.com/projects/${id}`, {
+    return trackPromise( axios.get(`https://app-vecindario.herokuapp.com/projects/${id}`, {
       headers: {
         Authorization: authToken,
       },
-    });
+    }));
   }, [authToken]);
 
   const createProject = useCallback((data) => {
-    return axios.post("https://app-vecindario.herokuapp.com/projects", data, {
+    return trackPromise( axios.post("https://app-vecindario.herokuapp.com/projects", data, {
       headers: {
         Authorization: authToken,
       },
-    });
+    }));
   }, [authToken]);
 
   const getLeads = useCallback((id) => {
-    return axios.get(`https://app-vecindario.herokuapp.com/leads_by_project_id/${id}`);
+    return trackPromise( axios.get(`https://app-vecindario.herokuapp.com/leads_by_project_id/${id}`));
   }, []);
 
   return { getProject, getProjects, getLeads, createProject, getCurrentUser };

@@ -7,6 +7,7 @@ import useAPI from "services/APIServices";
 import { useToasts } from "react-toast-notifications";
 import { useSetRecoilState } from "recoil";
 import { projectsListState } from "../atoms/atoms";
+import LoadingSpinner from "components/LoadingSpinner";
 
 const CreateProject = () => {
   const { addToast } = useToasts();
@@ -46,6 +47,7 @@ const CreateProject = () => {
       <Link to="/cms" className="btn_back">
         <img src={imgBack} alt="return cms page"></img>
       </Link>
+      <LoadingSpinner/>
       <div className="container__form--project">
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
