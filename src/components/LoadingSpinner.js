@@ -5,7 +5,6 @@ import Loader from 'react-loader-spinner';
 
 const LoadingSpinner = () => {
   const { promiseInProgress } = usePromiseTracker();
-  console.log('entreee')
   return (
     <div className="loading">
       { (promiseInProgress === true) ? 
