@@ -68,7 +68,7 @@ const App = () => {
             <Route path="/leads/:projectId" component={Home} />
             <PrivateRoute exact path="/cms" component={Cms} />
             <PrivateRoute exact path="/cms/create_project" component={CreateProject} />
-            <PrivateRoute exact path="/cms/update_project" component={CreateProject} />
+            <PrivateRoute exact path="/cms/update_project/:id" component={CreateProject} />
             <PrivateRoute exact path="/cms/detail_project/:id" component={DetailProject} />
             <PrivateRoute exact path="/cms/leads/:id" component={Leads} />
             <Redirect to="/" />
