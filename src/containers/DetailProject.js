@@ -32,9 +32,14 @@ const DetailProject = () => {
           <div className="container__projects">
             <ProjectCard data={project} />
           </div>
-          <Link to={`/cms/leads/${project.id}`}>
-            <button className="btn__leads">Leads</button>
-          </Link>
+          <div>
+            <Link to={`/cms/update_project/${project.id}`}>
+              <button className="btn__leads">Editar Proyecto</button>
+            </Link>
+            <Link to={`/cms/leads/${project.id}`}>
+              <button className="btn__leads">Leads</button>
+            </Link>
+          </div>
         </div>
       )}
     </>
