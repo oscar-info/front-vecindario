@@ -49,7 +49,7 @@ const FormModal = ({type = '', isOpen, onRequestClose, onSubmit }) => {
                 {errors.email?.type === 'required' && "El email es requerido"}
                 <hr></hr>
                 <input
-                type="text"
+                type="password"
                 name='password'
                 placeholder={"Contraseña"}
                 className="input-txt"
