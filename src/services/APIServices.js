@@ -44,9 +44,13 @@ export default function useAPI() {
     return trackPromise( axios.get(`${process.env.REACT_APP_API}/leads_by_project_id/${id}`));
   }, []);
 
-  const updateProject = useCallback((id) => {
-    return trackPromise( axios.put(`${process.env.REACT_APP_API}/projects/${id}`));
-  }, []);
+  const updateProject = useCallback((data, id) => {
+    return trackPromise( axios.put(`${process.env.REACT_APP_API}/projects/${id}`, data, {
+      headers: {
+        Authorization: authToken,
+      },
+    }));
+  }, [authToken]);
 
   return { getProject, getProjects, getLeads, createProject, getCurrentUser, updateProject };
 }
