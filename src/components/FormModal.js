@@ -39,6 +39,7 @@ const FormModal = ({type = '', isOpen, onRequestClose, onSubmit }) => {
                 />
                 {errors.phone?.type === 'required' && "Telefono requerido, formato valido: +57 300 000 0000"}
                 <hr></hr>
+                <small>Formato valido: +57 300 000 0000</small>
                 <input
                 type="email"
                 name='email'
@@ -57,6 +58,7 @@ const FormModal = ({type = '', isOpen, onRequestClose, onSubmit }) => {
                 />
                 {errors.password?.type === 'required' && "La contraseña es requerida, minimo 8 caracteres"}
                 <hr></hr>
+                <small>La contraseña debe tener como minimo 8 caracteres</small>
                 <button className="card__btnRegister" type='submit'>
                 Registrarse
                 </button>
@@ -124,6 +126,7 @@ const FormModal = ({type = '', isOpen, onRequestClose, onSubmit }) => {
                 />
                 {errors.phone?.type === 'required' && "Telefono requerido, formato valido: +57 300 000 0000"}
                 <hr></hr>
+                <small>Formato valido: +57 300 000 0000</small>
                 <input
                 type="email"
                 name='email'
