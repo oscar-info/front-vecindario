@@ -4,6 +4,7 @@ import useAPI from "services/APIServices";
 import { useParams, Link } from "react-router-dom";
 import "../assets/styles/components/DetailProject.scss";
 import ProjectCard from "../components/ProjectCard";
+import LoadingSpinner from "components/LoadingSpinner";
 
 const DetailProject = () => {
   const { id } = useParams();
@@ -25,14 +26,20 @@ const DetailProject = () => {
   return (
     <>
       <Header />
+      <LoadingSpinner/>
       {project && (
         <div className="container__detail--project">
           <div className="container__projects">
             <ProjectCard data={project} />
           </div>
-          <Link to={`/cms/leads/${project.id}`}>
-            <button className="btn__leads">Leads</button>
-          </Link>
+          <div>
+            <Link to={`/cms/update_project/${project.id}`}>
+              <button className="btn__leads">Editar Proyecto</button>
+            </Link>
+            <Link to={`/cms/leads/${project.id}`}>
+              <button className="btn__leads">Leads</button>
+            </Link>
+          </div>
         </div>
       )}
     </>

@@ -8,6 +8,8 @@ import axios from "axios";
 import FormModal from "../components/FormModal";
 import { useToasts } from 'react-toast-notifications';
 import useAuth from "../hooks/useAuth";
+import { trackPromise } from 'react-promise-tracker';
+import LoadingSpinner from "components/LoadingSpinner";
 
 
 
@@ -29,14 +31,17 @@ function Home() {
   }
 
   const getAllProjects = () => {
-    axios.get("https://app-vecindario.herokuapp.com/projects").then((response) => {
+    trackPromise(
+    axios.get(`${process.env.REACT_APP_API}/projects`).then((response) => {
       setProjects(response.data);
-    });
+    })
+    );
   };
 
 
   const createLead = (data) => {
-    axios.post("https://app-vecindario.herokuapp.com/leads", {...data, project_id: projectId})
+    trackPromise(
+    axios.post(`${process.env.REACT_APP_API}/leads`, {...data, project_id: projectId})
     .then((response) => {
       leads.push(response.data);
       addToast("Su informacion fue enviada exitosamente", {
@@ -49,11 +54,12 @@ function Home() {
       addToast("Su informacion no pudo ser enviada", {
         appearance: 'error',
         autoDismiss: true,
-    })})
+    })}));
   };
 
   const login = (data) => {
-    axios.post("https://app-vecindario.herokuapp.com/auth/login", data)
+    trackPromise(
+    axios.post(`${process.env.REACT_APP_API}/auth/login`, data)
     .then((response) => {
       handleAuth(response.data.token);
       history.push('/cms')
@@ -63,11 +69,12 @@ function Home() {
       addToast("El email o contraseña es invalido", {
         appearance: 'error',
         autoDismiss: true,
-    })})
+    })}));
   };
 
   const createUser = (data) => {
-    axios.post("https://app-vecindario.herokuapp.com/users", data)
+    trackPromise(
+    axios.post(`${process.env.REACT_APP_API}/users`, data)
     .then((response) => {
       user.push(response.data);
       setUser(response.data);
@@ -81,7 +88,7 @@ function Home() {
       addToast("Su cuenta no pudo ser creada, verifique todos los campos", {
         appearance: 'error',
         autoDismiss: true,
-    })})
+    })}));
   };
 
   useEffect(() => {
@@ -91,6 +98,7 @@ function Home() {
   return (
     <div className="home">
       <Header openModal={openModal} />
+      <LoadingSpinner />
       <div className="container__projects">
         {projects.map((project) => {
           return <CardProject data={project} key={project.id} openModal={openModal} />;
